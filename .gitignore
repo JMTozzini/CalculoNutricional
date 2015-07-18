@@ -1,0 +1,6 @@
+# Ignore all compilation phyton files .pyc
+*.pyc
+# Ignore local data serialized
+data.pkl
+# KDev files
+.project
