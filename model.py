@@ -9,8 +9,7 @@ class Model(object):
     """Model of the application, it contains the main information"""
     
     def __init__(self):
-        aData = Data();                             # Ingredient Data class used to import and load data
-        self.__ingredients = aData.getIngredients() # Retrieve all Excel information
+        self.__data = Data();                       # Ingredient Data class used to import and load data
         self.__recette = 0                          # Last recipe specified
         self.__metaGroups = []                      # All groups datas
         self.__initDatas()                          # Iniciate groups datas
@@ -46,7 +45,7 @@ class Model(object):
     
     def checkNumIngr(self, iNumero): 
         """Check if the ingredient is in the ingredients list"""
-        for aIngredient in self.__ingredients:
+        for aIngredient in self.__data.getIngredients():
             if aIngredient.numero == iNumero:
                 return True
         return False
@@ -62,10 +61,11 @@ class Model(object):
     
     def resetDatabase(self):
         """Reset the database and load from the Excel file."""
+        self.__data.resetData()
         
     def getIngredient(self, iNumero):
         """Retrieve the ingredient thanks to the ingredient number"""
-        for oIngredient in self.__ingredients:
+        for oIngredient in self.__data.getIngredients():
             if oIngredient.numero == iNumero:
                 return oIngredient
         raise MyException("getIngredient() : Numero de ingrediente errado.")
