@@ -35,12 +35,12 @@ class PortionRecette:
         return self.__group
     
     def __str__(self):
-        oValue = "Groupo: " + str(self.__getGroup().getNumber()) + ", " + self.__getGroup().getDesc() +".\n"
-        oValue += "Peso de uma porcao: " + str("%.3f" % self.getPoids()) + " g.\n"
-        oValue += "Carbo: " + str("%.3f" % self.__carbo) + " g, " + str("%.2f" % float(self.__carbo/Constants.CarboJour*100)) + "%\n"
-        oValue += "Proteina: " + str("%.3f" % self.__proteine) + " g, " + str("%.2f" % float(self.__proteine/Constants.ProteineJour*100)) + "%\n"
-        oValue += "Lipideos: " + str("%.3f" % self.__lipide) + " g, " + str("%.2f" % float(self.__lipide/Constants.LipideJour*100)) + "%\n"
-        oValue += "Fibra: " + str("%.3f" % self.__fibre) + " g, " + str("%.2f" % float(self.__fibre/Constants.FibreJour*100)) + "%\n"
-        oValue += "Sodio: " + str("%.3f" % self.__sodium) + " mg, " + str("%.2f" % float(self.__sodium/Constants.SodioJour*100)) + "%\n"
-        oValue += "Saturados: " + str("%.3f" % self.__sature) + " g, " + str("%.2f" % float(self.__sature/Constants.SatureJour*100)) + "%\n"
-        return oValue
+        oStr = "Groupo: " + str(self.__getGroup().getNumber()) + ", " + self.__getGroup().getDesc() +".\n"
+        oStr += "Peso de uma porcao: " + str("%.3f" % self.getPoids()) + " g.\n"
+        oStr += "Carbo: \t\t" + str("%7.3f" % self.__carbo) + " g \t" + str("%5.2f" % float(self.__carbo/Constants.CarboJour*100)) + "%\n"
+        oStr += "Proteina: \t" + str("%7.3f" % self.__proteine) + " g \t" + str("%5.2f" % float(self.__proteine/Constants.ProteineJour*100)) + "%\n"
+        oStr += "Lipideos: \t" + str("%7.3f" % self.__lipide) + " g \t" + str("%5.2f" % float(self.__lipide/Constants.LipideJour*100)) + "%\n"
+        oStr += "Fibra: \t\t" + str("%7.3f" % self.__fibre) + " g \t" + str("%5.2f" % float(self.__fibre/Constants.FibreJour*100)) + "%\n"
+        oStr += "Sodio: \t\t" + str("%7.3f" % self.__sodium) + " mg \t" + str("%5.2f" % float(self.__sodium/Constants.SodioJour*100)) + "%\n"
+        oStr += "Saturados: \t" + str("%7.3f" % self.__sature) + " g \t" + str("%5.2f" % float(self.__sature/Constants.SatureJour*100)) + "%\n"
+        return oStr
