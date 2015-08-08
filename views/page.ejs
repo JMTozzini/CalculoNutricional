@@ -7,6 +7,10 @@
 
 	<body>
 		<h1>Test</h1>
-		<p><%= msg %></p>
+		<ul>
+		<% msg.forEach(function(ingredient) { %>
+			<li><%= ingredient %></li>
+		<% }); %>
+		</ul>
 	</body>
 </html>

@@ -8,7 +8,7 @@ class Data :
 	"""Class used to import Excel data"""
 	
 	def __init__(self):
-		self.__excelFilePath = "./media/Taco_4a_edicao_2011.xls"		# Data file path of the Excel file
+		self.__excelFilePath = "./python/media/Taco_4a_edicao_2011.xls"		# Data file path of the Excel file
 		self.__excelFile = xlrd.open_workbook(self.__excelFilePath)	# Object that opens and contains the Excel file
 		self.__sheetNutriments = self.__excelFile.sheet_by_index(0)	# Nutriment sheet
 		self.__sheetGrease = self.__excelFile.sheet_by_index(1)		# Grease sheet
