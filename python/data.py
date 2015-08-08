@@ -92,9 +92,11 @@ class Data :
 
 	def __loadData(self):
 		"""Load data from the current database"""
-		self.__ingredients = self.__dbCursor.execute("SELECT * FROM Ingredients")
-		for aIngredient in self.__ingredients :
-			print(aIngredient)
+		aIngredients = self.__dbCursor.execute("SELECT * FROM Ingredients")
+		for aIngredient in aIngredients :
+			aReturnedIngredient = Ingredient()
+			aReturnedIngredient.setValues(aIngredient)
+			self.__ingredients.append(aReturnedIngredient)
 		
 		#aDataFile = open(self.__dataFilePath, 'r')
 		#self.__ingredients=pickle.load(aDataFile)

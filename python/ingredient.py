@@ -11,6 +11,17 @@ class Ingredient(object):
         self.__fibre = 0
         self.__sodium  = 0
         self.__sature = 0
+        
+    def setValues(self, iValues):
+        self.__nom = 		iValues[0]
+        self.__numero = 	iValues[1]
+        self.__calories = 	iValues[2]
+        self.__carbo = 		iValues[3]
+        self.__proteine = 	iValues[4]
+        self.__lipide = 	iValues[5]
+        self.__fibre = 		iValues[6]
+        self.__sodium  = 	iValues[7]
+        self.__sature = 	iValues[8]
 
     def __str__(self):
         oValue = "nom " + self.nom
