@@ -2,13 +2,14 @@
 
 import xlrd, pickle
 from ingredient import Ingredient
+import sqlite3
 
 class Data :
 	"""Class used to import Excel data"""
 	
 	def __init__(self):
-		self.__DataFilePath = "./media/Taco_4a_edicao_2011.xls"		# Data file path of the Excel file
-		self.__excelFile = xlrd.open_workbook(self.__DataFilePath)	# Object that opens and contains the Excel file
+		self.__excelFilePath = "./media/Taco_4a_edicao_2011.xls"		# Data file path of the Excel file
+		self.__excelFile = xlrd.open_workbook(self.__excelFilePath)	# Object that opens and contains the Excel file
 		self.__sheetNutriments = self.__excelFile.sheet_by_index(0)	# Nutriment sheet
 		self.__sheetGrease = self.__excelFile.sheet_by_index(1)		# Grease sheet
 		self.__valuesColsNutriments = {								# Nutriment columns numbers
@@ -19,7 +20,7 @@ class Data :
 			"proteine":	5,
 			"lipide":	6,
 			"fibre":	9,
-			"sodium":	17			
+			"sodium":	17
 			}
 		self.__valuesColsGrease = {		# Grease Column number
 			"numero":	0,
@@ -27,6 +28,8 @@ class Data :
 			}
 		self.__ingredients = []				# Output list of inported ingredients
 		self.__dataFilePath = "./data.pkl"	# Save data fil path
+		self.__db = sqlite3.connect('data.sqlite')
+		self.__dbCursor = self.__db.cursor()
 		
 	def __importData(self):
 		"""Import data from Excel file and remove the old data""" 
@@ -64,18 +67,38 @@ class Data :
 				aNumSature = self.__sheetGrease.cell(rowx=aIdxRow,colx=self.__valuesColsGrease["numero"]).value
 				self.__ingredients[int(aNumSature)-1].sature = self.__sheetGrease.cell(rowx=aIdxRow,colx=self.__valuesColsGrease["sature"]).value
 		
-		aDataFile = open(self.__dataFilePath, 'w')
-		
-		pickle.dump(self.__ingredients, aDataFile)
-		
-		aDataFile.close()
+		self.__insertToDb(self.__ingredients);
 
+	def __insertToDb(self, iIngredients):
+		"""Insert an ingredient into the database"""
+		self.__dbCursor.execute("DELETE FROM Ingredients")
+		for aIngredient in iIngredients :
+			self.__dbCursor.execute("INSERT INTO Ingredients VALUES ('"+
+						   str(aIngredient.nom) + "', '" +
+						   str(aIngredient.numero) + "', '" +
+						   str(aIngredient.calories) + "', '" +
+						   str(aIngredient.carbo) + "', '" +
+						   str(aIngredient.proteine) + "', '" +
+						   str(aIngredient.lipide) + "', '" +
+						   str(aIngredient.fibre) + "', '" +
+						   str(aIngredient.sodium) + "', '" +
+						   str(aIngredient.sature) + "'"+
+						   ")")
+			#print(str(aIngredient.numero) + " inserted")
+		self.__db.commit()
+		#aDataFile = open(self.__dataFilePath, 'w')
+		#pickle.dump(iIngredients, aDataFile)
+		#aDataFile.close()
 
 	def __loadData(self):
-		"""Load data from the current database"""		
-		aDataFile = open(self.__dataFilePath, 'r')
-		self.__ingredients=pickle.load(aDataFile)
-		aDataFile.close()
+		"""Load data from the current database"""
+		self.__ingredients = self.__dbCursor.execute("SELECT * FROM Ingredients")
+		for aIngredient in self.__ingredients :
+			print(aIngredient)
+		
+		#aDataFile = open(self.__dataFilePath, 'r')
+		#self.__ingredients=pickle.load(aDataFile)
+		#aDataFile.close()
 		
 	def getIngredients(self):
 		"""Retrieve ingredients by different means"""

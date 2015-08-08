@@ -54,7 +54,7 @@ class Ingredient(object):
     def convertToFloat(self, ioValue):
         try : ioValue = float(ioValue)
         except: ioValue=0
-        return ioValue   
+        return ioValue
 
     def set_nom(self, value):
         self.__nom = value
