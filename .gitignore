@@ -6,3 +6,5 @@
 # KDev files
 .project
 .kdev4
+# Node modules
+node_modules

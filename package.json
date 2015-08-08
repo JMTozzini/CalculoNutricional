@@ -1,0 +1,14 @@
+{
+  "name": "CalculoNutricional",
+  "version": "0.3.0",
+  "private": true,
+  "author": "JMT <jeanmichel53@hotmail.com>",
+  "description": "This program is used to calculate nutricional quantity of a recipe. It is based on nutrition Excel file.",
+  "dependencies": {
+    "python-shell": "~0.1.0",
+    "express": "~4.13.3",
+    "cookie-session": "~1.2.0",
+    "body-parser": "~1.13.3",
+    "ejs": "~2.3.3"
+  }
+}
